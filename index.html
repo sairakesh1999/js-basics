@@ -1,35 +1,36 @@
-<html>
-    <head></head>
-    <body>
-        <form onsubmit="saveToLocalStorage(event)">
-            <label> Name </label>
-@@ -9,7 +10,8 @@
-            <input type="tel" name="phonenumber" />
-            <button> Submit </button>
-        </form>
-        <ul id='listofitems'></ul>
-        <ul id='listofitems'>
-        </ul>
-        <script>
-            function saveToLocalStorage(event) {
-                event.preventDefault();
-@@ -31,8 +33,22 @@
-                function showUserOnscreen(obj) {
-                    const parentELem = document.getElementById('listofitems')
+<form onsubmit="saveToLocalStorage(event)">
+  <label> Name </label>
+  <input type="text" name="username" required/>
+  <input type="text" name="username" id="usernameInputTag" required/>
+  <label> EmailId </label>
+  <input type="email" name="emailId" required/>
+  <input type="email" name="emailId" id="emailIdInputTag" required/>
+  <label> Phone Number </label>
+  <input type="tel" name="phonenumber" />
+  <input type="tel" name="phonenumber" id="phonenumberInputTag" />
+  <button> Submit </button>
+</form>
+<ul id='listofitems'>
+@@ -43,10 +43,30 @@
+              localStorage.removeItem(obj.email)
+              parentELem.removeChild(childELem)
+          }
+          const editButton = document.createElement('input')
+          editButton.type = "Button"
+          editButton.value = 'edit'
+          editButton.onclick = () => {
+              localStorage.removeItem(obj.email)
+              parentELem.removeChild(childELem)
+              document.getElementById('usernameInputTag').value = obj.name
+              document.getElementById('emailIdInputTag').value = obj.email
+              document.getElementById('phonenumberInputTag').value = obj.phonenumber
 
-                    parentELem.innerHTML = parentELem.innerHTML+`<li>${obj.name} - ${obj.email} - ${obj.phonenumber}</li>`
-                }
-                    const childELem = document.createElement('li')
-                    childELem.textContent = obj.name + ' - ' + obj.email + ' - ' + obj.phonenumber + ' - '
+          }
+          childELem.appendChild(deleteButton)
+          childELem.appendChild(editButton)
+          parentELem.appendChild(childELem)
 
-                    const deleteButton = document.createElement('input')
-                    deleteButton.type = "button"
-                    deleteButton.value = 'Delete'
-                    deleteButton.onclick = () => {
-                        localStorage.removeItem(obj.email)
-                        parentELem.removeChild(childELem)
-                    }
-                    childELem.appendChild(deleteButton)
-                    parentELem.appendChild(childELem)
 
-                    }
+
+
+          }
